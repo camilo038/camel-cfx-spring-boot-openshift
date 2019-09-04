@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: base
+  spec:
+    tags:
+    - from:
+        kind: ImageStreamImage
+        name: base@sha256:c930de596640711adb68e8dbf8485dc24ebce6ec7770f3ce1ecdaa06b6e1e1ae
+        namespace: fusedelte72
+      name: "1.0"

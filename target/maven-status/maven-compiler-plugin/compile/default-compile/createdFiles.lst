@@ -1,0 +1,10 @@
+com\intelgy\services\package-info.class
+com\intelgy\services\TestWebService.class
+com\intelgy\services\DoTest.class
+com\intelgy\services\AddEmision.class
+com\intelgy\services\DoTestResponse.class
+com\intelgy\services\ObjectFactory.class
+com\intelgy\services\GetaddEmision.class
+com\intelgy\services\TestWebServiceImplService.class
+com\intelgy\services\GetaddEmisionResponse.class
+org\mycompany\Application.class

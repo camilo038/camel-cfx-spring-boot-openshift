@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring        http://camel.apache.org/schema/spring/camel-spring.xsd  http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf-2.8.3.xsd">
+    <bean class="org.slf4j.LoggerFactory" factory-method="getLogger" id="rh1">
+        <constructor-arg index="0" value="rh1"/>
+    </bean>
+    <cxf:cxfEndpoint address="{{cxf.path}}"
+        endpointName="a:TestWebServiceImplPort" id="CXFTest"
+        serviceClass="com.intelgy.services.TestWebService"
+        serviceName="a:TestWebServiceImplService"
+        wsdlURL="/wsdl/validador.wsdl" xmlns:a="http://services.intelgy.com/"/>
+    <camelContext id="camel" streamCache="true" threadNamePattern="100" xmlns="http://camel.apache.org/schema/spring">
+        <threadPoolProfile defaultProfile="true" id="changedProfile"
+            maxQueueSize="100" poolSize="3"/>
+        <route id="simple-route">
+            <!--             <from id="route-timer" uri="timer://foo?period=1000"/> -->
+            <from id="_from1" uri="cxf:bean:CXFTest?dataFormat=MESSAGE"/>
+            <!--             <setBody id="route-setBody"> -->
+            <!--                 <simple>Hello World from wsdl cxf bean</simple> -->
+            <!--             </setBody> -->
+            <log id="_log1" loggerRef="rh1" loggingLevel="ERROR" message="Log slf4j::::::::${body}"/>
+        </route>
+    </camelContext>
+</beans>
